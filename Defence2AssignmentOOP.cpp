@@ -10,7 +10,7 @@ public:
         value = value_;
     }
     int take() {
-        if (!taken) {
+        if (taken == false) {
             taken = true;
             return value;
         }
@@ -27,12 +27,14 @@ public:
     }
     void collect(Coin& coin) {
         int value = coin.take();
-        if (value == 0) {
-            std::cout << name << ": coin already taken\n";
-            return;
+        if (value > 0) {
+            score += value;
+            std::cout << name << " collected " << value << ", score=" << score << "\n";
         }
-        score += value;
-        std::cout << name << ": collected " << value << ", score=" << score << "\n";
+        else {
+            std::cout << name << ": coin already taken\n";
+        }
+        
         
     }
     int getScore() {
